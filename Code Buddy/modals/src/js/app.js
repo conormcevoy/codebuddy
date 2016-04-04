@@ -51,7 +51,7 @@ app.controller('ModalInstanceCtrl',["$scope", "authService", function($scope, au
     };
 }]);
 
-app.service('authService', function(){
+app.service('authService', function($window){
 
 
     var ref = new Firebase("https://dazzling-fire-6299.firebaseio.com");
