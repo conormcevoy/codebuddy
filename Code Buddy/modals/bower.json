@@ -1,0 +1,26 @@
+{
+  "name": "modals",
+  "authors": [
+    "Conor Mc Evoy"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-bootstrap": "^1.2.5",
+    "bootstrap": "^3.3.6",
+    "angular": "^1.5.3",
+    "firebase": "^2.4.1",
+    "angularfire": "^1.1.4"
+  }
+}
