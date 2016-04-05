@@ -1,31 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	
-	<meta charset="UTF-8">
-	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	
-	<title>Code Buddy</title>
+    <head>
+        <title>Code Buddy</title>
 
-	<link  rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
-	<link  rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap-theme.css">
-    <link  rel="stylesheet" href="./css/styles.css">
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <script src="../bower_components/firebase/firebase.js"></script>
-	<script src="../bower_components/angular/angular.js"></script>
-	<script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-    <script src="../bower_components/angularfire/dist/angularfire.js"></script>
-    <script src="../bower_components/jquery/dist/jquery.js"></script>
+        <link  rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
+        <link  rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap-theme.css">
+        <link  rel="stylesheet" href="./css/styles.css">
 
-	
-	<script src="./js/app.js"></script>
-	
-</head>
+        <script src="../bower_components/firebase/firebase.js"></script>
+        <script src="../bower_components/angular/angular.js"></script>
+        <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+        <script src="../bower_components/angularfire/dist/angularfire.js"></script>
+        <script src="../bower_components/jquery/dist/jquery.js"></script>
+
+
+        <script src="./js/app.js"></script>
+
+    </head>
+
 <body ng-app="ui.bootstrap.demo">
 
 
-    <div ng-controller="ModalDemoCtrl">
+    <div ng-controller="ModalCtrl">
 
         <div>
             <nav class="navbar navbar-default">
@@ -37,8 +37,20 @@
                         </a>
                     </div>
 
-                    <form class="navbar-form navbar-left">
-                        <button type="submit" class="btn btn-success" ng-click="open()">Sign Up</button>
+                    <!-- Login Box on Navbar-->
+                    <form class="navbar-form navbar-left" role="search">
+                        <div class="form-group">
+                            <input type="email" ng-model="email" class="form-control" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" ng-model="password" class="form-control" placeholder="Password">
+                        </div>
+                        <button type="submit" class="btn btn-success" ng-click="fastSign()">Submit</button>
+                    </form>
+
+                    <form class="navbar-form navbar-right">
+                        <button type="submit" class="btn btn-success" ng-click="signIn()">Sign In</button>
+                        <button type="submit" class="btn btn-success" ng-click="signUp()">Sign Up</button>
                     </form>
 
 
@@ -47,8 +59,8 @@
             </nav> <!--navbar navbar-default-->
         </div>
 
-        <div ng-controller="ModalInstanceCtrl">
-            <script type="text/ng-template" id="myModalContent.html">
+        <div ng-controller="signInController">
+            <script type="text/ng-template" id="signIn.html">
                 <div class="modal-header">
                     <h3 class="modal-title">Sign In</h3>
                     <p>Sign in to your account here...</p>
@@ -56,23 +68,51 @@
                 <div class="modal-body">
                     <form>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Email address</label>
-                            <input type="email" ng-model="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                            <label for="signIn_email">Email address</label>
+                            <input type="email" ng-model="email" class="form-control" id="signIn_email" placeholder="Email">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Password</label>
-                            <input type="password" ng-model="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                            <label for="signIn_password">Password</label>
+                            <input type="password" ng-model="password" class="form-control" id="signIn_password" placeholder="Password">
                         </div>
-                        <!--<table class="nav" align="center">-->
-                            <!--<tr>-->
-                                <!--<td>-->
-                                    <!--<p><button type="submit" class="btn btn-primary" ng-click="signIn()">Submit</button>-->
-
-                                <!--</td>-->
-                            <!--</tr>-->
-                        <!--</table>-->
                     </form>
 
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                </div>
+                <div class="forgotPassword" align="center">
+                    <a href="./forgotpassword.html"> Forgot your password?</a>
+                </div>
+            </script>
+        </div>
+
+        <div ng-controller="signUpController">
+            <script type="text/ng-template" id="signUp.html">
+                <div class="modal-header">
+                    <h3 class="modal-title">Sign In</h3>
+                    <p>Register for a new account below</p>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="signUp_username">Username</label>
+                            <input type="text" ng-model="username" class="form-control" id="signUp_username" placeholder="Username">
+                        </div>
+                        <div class="form-group">
+                            <label for="signUp_email">Email address</label>
+                            <input type="email" ng-model="email" class="form-control" id="signUp_email" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <label for="signUp_password">Password</label>
+                            <input type="password" ng-model="password" class="form-control" id="signUp_password" placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <label for="signUp_passwordConfirm">Confirm Password</label>
+                            <input type="password" ng-model="password" class="form-control" id="signUp_passwordConfirm" placeholder="Confirm Password">
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
@@ -88,8 +128,12 @@
 
     </div>
 
+    <div id="userPrompt" ng-hide="true">
+        <p></p>
+    </div>
 
 
-	
+
+
 </body>
 </html>

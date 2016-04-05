@@ -1,191 +1,181 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Bootstrap Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<html>
+    <head>
+        <title>Code Buddy - Home</title>
 
-  <link  rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
-  <link  rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap-theme.css">
-  <link  rel="stylesheet" href="./css/styles.css">
+        <meta charset="utf-8">
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <link  rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
+        <link  rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap-theme.css">
+        <link  rel="stylesheet" href="./css/styles.css">
+
+        <script src="../bower_components/firebase/firebase.js"></script>
+        <script src="../bower_components/angular/angular.js"></script>
+        <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+        <script src="../bower_components/angularfire/dist/angularfire.js"></script>
+        <script src="../bower_components/jquery/dist/jquery.js"></script>
 
 
+        <script src="./js/profile.js"></script>
 
-  <script src="../bower_components/firebase/firebase.js"></script>
-  <script src="../bower_components/angular/angular.js"></script>
-  <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-  <script src="../bower_components/angularfire/dist/angularfire.js"></script>
-  <script src="../bower_components/jquery/dist/jquery.js"></script>
-   <style>
-    /* Set black background color, white text and some padding */
-    footer {
-      background-color: #555;
-      color: white;
-      padding: 15px;
-    }
-  </style>
-</head>
-<body ng-app = "app" ng-controller="profile">
+    </head>
 
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="">
-        <img alt="Software Project" src="./images/en.png" width="100%" height="100%">
-      </a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">Messages</a></li>
-      </ul>
-      <!--<form class="navbar-form navbar-right" role="search">-->
-        <!--<div class="form-group input-group">-->
-          <!--<input type="text" class="form-control" placeholder="Search..">-->
-          <!--<span class="input-group-btn">-->
-            <!--<button class="btn btn-default" type="button">-->
-              <!--<span class="glyphicon glyphicon-search"></span>-->
-            <!--</button>-->
-          <!--</span>        -->
-        <!--</div>-->
-      <!--</form>-->
-      <form class="navbar-form navbar-right">
-        <button type="submit" class="btn btn-success" ng-click="signOut()">Log Out</button>
-      </form>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-user"></span> My Account</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
+<body ng-app = "profile" ng-controller="profile">
 
-<div class="container text-center" ng-controller="myCtrl">
-  <div class="row">
-    <div class="col-sm-3 well">
-      <div class="well">
-        <p><a href="#" ng-model="myProfile">Hello {{myProfile}} !</a></p>
-        <img src="./avatars/conor.png" class="img-circle" height="65" width="65" alt="Avatar">
+
+    <nav class="navbar navbar-default">
+
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="">
+            <img alt="Software Project" src="./images/en.png" width="100%" height="100%">
+          </a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#">Messages</a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <button type="submit" class="btn btn-success" ng-click="signOut()">Log Out</button>
+          </form>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#"><span class="glyphicon glyphicon-user"></span> My Account</a></li>
+          </ul>
+        </div>
       </div>
-      <div class="well">
-        <p><a href="#">Domains</a></p>
-        <p>
-          <span class="label label-default">JAVA</span>
-          <span class="label label-primary">HTML</span>
-          <span class="label label-success">CSS</span>
-          <span class="label label-info">Angular.JS</span>
-          <span class="label label-warning">JavaScript</span>
-          <span class="label label-danger">ActionScript</span>
-        </p>
-      </div>
-      <div class="alert alert-success fade in">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-        <p><strong>Ey!</strong></p>
-        People are looking at your profile. Find out who.
-      </div>
-      <p><a href="#">Link</a></p>
-      <p><a href="#">Link</a></p>
-      <p><a href="#">Link</a></p>
-    </div>
+    </nav>
 
-    <div class="col-sm-7">
-     <div class="row">
-        <div class="col-sm-12">
-          <div class="panel panel-default text-left">
-            <div class="panel-body">
-              <p contenteditable="true">Status: Working on Assignments</p>
-              <button type="button" class="btn btn-default btn-sm">
-                <span class="glyphicon glyphicon-thumbs-up"></span> Like
-              </button>
+    <div class="container text-center" ng-controller="myCtrl">
+      <div class="row">
+        <div class="col-sm-3 well">
+          <div class="well">
+            <p><a href="#" ng-model="myProfile">Hello {{myProfile}} !</a></p>
+            <img src="./avatars/conor.png" class="img-circle" height="65" width="65" alt="Avatar">
+          </div>
+          <div class="well">
+            <p><a href="#">Domains</a></p>
+            <p>
+              <span class="label label-default">JAVA</span>
+              <span class="label label-primary">HTML</span>
+              <span class="label label-success">CSS</span>
+              <span class="label label-info">Angular.JS</span>
+              <span class="label label-warning">JavaScript</span>
+              <span class="label label-danger">ActionScript</span>
+            </p>
+          </div>
+          <div class="alert alert-success fade in">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+            <p><strong>Ey!</strong></p>
+            People are looking at your profile. Find out who.
+          </div>
+          <p><a href="#">Link</a></p>
+          <p><a href="#">Link</a></p>
+          <p><a href="#">Link</a></p>
+        </div>
+
+        <div class="col-sm-7">
+         <div class="row">
+            <div class="col-sm-12">
+              <div class="panel panel-default text-left">
+                <div class="panel-body">
+                  <p contenteditable="true">Status: Working on Assignments</p>
+                  <button type="button" class="btn btn-default btn-sm">
+                    <span class="glyphicon glyphicon-thumbs-up"></span> Like
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-3">
+              <div class="well">
+               <p>Conor</p>
+               <img src="./avatars/conor.png" class="img-circle" height="55" width="55" alt="Avatar">
+              </div>
+            </div>
+            <div class="col-sm-9">
+              <div class="well">
+                <p>I need help with my assignment, it's on Hackerrank, if anyone can help me please get in touch.
+                  System.out.println("Hello, World!");</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-3">
+              <div class="well">
+               <p>Oisin</p>
+               <img src="./avatars/oisin.png" class="img-circle" height="55" width="55" alt="Avatar">
+              </div>
+            </div>
+            <div class="col-sm-9">
+              <div class="well">
+                <p>Does anyone know how to do recursion in Python? I can help you out with Java and HTML in exchange, feel free to get in touch..</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-3">
+              <div class="well">
+               <p>Alex</p>
+               <img src="./avatars/alex.png" class="img-circle" height="55" width="55" alt="Avatar">
+              </div>
+            </div>
+            <div class="col-sm-9">
+              <div class="well">
+                <p>Looking to learn more about Node.JS, if anyone can help me please message me. Check my domains to see what I can help you with</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-3">
+              <div class="well">
+               <p>Mathew</p>
+               <img src="./avatars/mathew.png" class="img-circle" height="55" width="55" alt="Avatar">
+              </div>
+            </div>
+            <div class="col-sm-9">
+              <div class="well">
+                <p>Working on a cool project right now! Hit me up for more information, I need some developers to help with this</p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-
-      <div class="row">
-        <div class="col-sm-3">
-          <div class="well">
-           <p>Conor</p>
-           <img src="./avatars/conor.png" class="img-circle" height="55" width="55" alt="Avatar">
+        <div class="col-sm-2 well">
+          <div class="thumbnail">
+            <p>Upcoming Events:</p>
+            <img src="paris.jpg" alt="Paris" width="400" height="300">
+            <p><strong>Paris</strong></p>
+            <p>Fri. 27 November 2015</p>
+            <button class="btn btn-primary">Info</button>
           </div>
-        </div>
-        <div class="col-sm-9">
           <div class="well">
-            <p>I need help with my assignment, it's on Hackerrank, if anyone can help me please get in touch.
-              System.out.println("Hello, World!");</p>
+            <p>ADS</p>
           </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-sm-3">
           <div class="well">
-           <p>Oisin</p>
-           <img src="./avatars/oisin.png" class="img-circle" height="55" width="55" alt="Avatar">
-          </div>
-        </div>
-        <div class="col-sm-9">
-          <div class="well">
-            <p>Does anyone know how to do recursion in Python? I can help you out with Java and HTML in exchange, feel free to get in touch..</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-sm-3">
-          <div class="well">
-           <p>Alex</p>
-           <img src="./avatars/alex.png" class="img-circle" height="55" width="55" alt="Avatar">
-          </div>
-        </div>
-        <div class="col-sm-9">
-          <div class="well">
-            <p>Looking to learn more about Node.JS, if anyone can help me please message me. Check my domains to see what I can help you with</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-sm-3">
-          <div class="well">
-           <p>Mathew</p>
-           <img src="./avatars/mathew.png" class="img-circle" height="55" width="55" alt="Avatar">
-          </div>
-        </div>
-        <div class="col-sm-9">
-          <div class="well">
-            <p>Working on a cool project right now! Hit me up for more information, I need some developers to help with this</p>
+            <p>ADS</p>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-sm-2 well">
-      <div class="thumbnail">
-        <p>Upcoming Events:</p>
-        <img src="paris.jpg" alt="Paris" width="400" height="300">
-        <p><strong>Paris</strong></p>
-        <p>Fri. 27 November 2015</p>
-        <button class="btn btn-primary">Info</button>
-      </div>
-      <div class="well">
-        <p>ADS</p>
-      </div>
-      <div class="well">
-        <p>ADS</p>
-      </div>
-    </div>
-  </div>
-</div>
 
-<footer class="container-fluid text-center">
-  <p>Code Buddy 2016</p>
-</footer>
+    <footer class="container-fluid text-center">
+      <p>Code Buddy 2016</p>
+    </footer>
 
 
 <script src="./js/profile.js"></script>
+
 </body>
 </html>

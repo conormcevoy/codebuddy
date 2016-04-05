@@ -1,22 +1,14 @@
 var app = angular.module("ui.bootstrap.demo", ['ui.bootstrap', "firebase"]);
 
-app.controller('ModalDemoCtrl', function ($scope, $uibModal, $log) {
+app.controller('ModalCtrl', function ($scope, $window, $uibModal, $log) {
 
-    $scope.items = ['item1', 'item2', 'item3'];
-
-    $scope.animationsEnabled = true;
-
-    $scope.open = function (size) {
+    // Opens the signIn modal window after button is clicked on User Interface
+    $scope.signIn = function (size) {
         var modalInstance = $uibModal.open({
-            animation: $scope.animationsEnabled,
-            templateUrl: 'myModalContent.html',
-            controller: 'ModalInstanceCtrl',
-            size: size,
-            // resolve: {
-            //     items: function () {
-            //         return $scope.items;
-            //     }
-            // }
+            animation: true,
+            templateUrl: 'signIn.html',
+            controller: 'signInController',
+            size: size
         });
 
         modalInstance.result.then(function (selectedItem) {
@@ -26,19 +18,51 @@ app.controller('ModalDemoCtrl', function ($scope, $uibModal, $log) {
         });
     };
 
-    $scope.toggleAnimation = function () {
-        $scope.animationsEnabled = !$scope.animationsEnabled;
+    // Opens the signUp modal window after button is clicked on User Interface
+    $scope.signUp = function (size) {
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: 'signUp.html',
+            controller: 'signUpController',
+            size: size
+        });
+
+        modalInstance.result.then(function (selectedItem) {
+            $scope.selected = selectedItem;
+        }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
+        });
     };
+    
+    
+    $scope.fastSign = function(){
+
+        var ref = new Firebase("https://dazzling-fire-6299.firebaseio.com");
+
+        ref.authWithPassword({
+            email: $scope.email,
+            password: $scope.password
+            }, function(error, authData) {
+                if (error) {
+                    console.log("Login Failed!", error);
+                } else {
+                    console.log("Authenticated successfully with payload:", authData);
+                    $window.location.href = 'profile.html';
+                }
+            });
+    };
+
+
+
 
 });
 
-// Please note that $uibModalInstance represents a modal window (instance) dependency.
-// It is not the same as the $uibModal service used above.
 
-app.controller('ModalInstanceCtrl',["$scope", "authService", function($scope, authService, $uibModalInstance, items){
+app.controller('signInController',["$scope", "authService", function($scope, authService, $uibModalInstance){
 
 
     $scope.ok = function () {
+
         authService.signIn($scope.email, $scope.password);
         // wrap this in a conditional statement
         $scope.$dismiss();
@@ -46,10 +70,32 @@ app.controller('ModalInstanceCtrl',["$scope", "authService", function($scope, au
     };
 
     $scope.cancel = function () {
+
 		$scope.$dismiss();
-        //$uibModalInstance.dismiss('cancel');
+
     };
+
 }]);
+
+app.controller('signUpController',["$scope", "authService", function($scope, authService, $uibModalInstance){
+
+
+    $scope.ok = function () {
+
+        authService.signUp($scope.email, $scope.password);
+        // wrap this in a conditional statement
+        $scope.$dismiss();
+
+    };
+
+    $scope.cancel = function () {
+
+        $scope.$dismiss();
+
+    };
+
+}]);
+
 
 app.service('authService', function($window){
 
@@ -71,6 +117,32 @@ app.service('authService', function($window){
         });
 
         return;
+    };
+
+    this.signUp = function(emailIn, passwordIn){
+
+        ref.createUser({
+            email: emailIn,
+            password: passwordIn
+        }, function(error, userData) {
+            if (error) {
+                switch (error.code) {
+                    case "EMAIL_TAKEN":
+                        console.log("The new user account cannot be created because the email is already in use.");
+                        break;
+                    case "INVALID_EMAIL":
+                        console.log("The specified email is not a valid email.");
+                        break;
+                    default:
+                        console.log("Error creating user:", error);
+                }
+            } else {
+                console.log("Successfully created user account with uid:", userData.uid);
+
+            }
+        });
+
+
     };
 
 
